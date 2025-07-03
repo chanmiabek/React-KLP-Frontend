@@ -1,51 +1,65 @@
 
-import { useState } from "react";
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-// import { useEffect } from "react";
-import axios from 'axios';
-import React from "react";
-// (Removed duplicate Login component implementation)
 
-  function Login() {
+const Login = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [errorMsg, setErrorMsg] = useState('');
   const navigate = useNavigate();
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    const res = await axios ("http://localhost:8080/api/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-      credentials: "include", // enable cookies if you use cookie-based auth
-    });
-    const data = await res.json();
-    if (data.token) {
-      localStorage.setItem("authToken", data.token);
-      navigate("/");
-    } else {
-      alert("Login failed");
+
+    try {
+      const response = await fetch('http://localhost:5000/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        // Save token and redirect
+        localStorage.setItem('token', data.token);
+        navigate('/dashboard');
+      } else {
+        // Show error from server
+        setErrorMsg(data.error || 'Invalid login');
+      }
+    } catch (err) {
+      setErrorMsg('Server error. Please try again later.');
     }
   };
 
   return (
-    <div className="container mt-5">
-      <h2>Admin Login</h2>
-      <form onSubmit={handleLogin} className="mt-4">
-        <div className="mb-3">
+    <div className="container mt-5 col-md-6">
+      <h2 className="mb-4">Login</h2>
+      {errorMsg && <div className="alert alert-danger">{errorMsg}</div>}
+      <form onSubmit={handleLogin}>
+        <div className="form-group mb-3">
           <label>Email</label>
-          <input type="email" className="form-control" onChange={(e) => setEmail(e.target.value)} required />
+          <input
+            type="email"
+            className="form-control"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required />
         </div>
-        <div className="mb-3">
+        <div className="form-group mb-3">
           <label>Password</label>
-          <input type="password" className="form-control" onChange={(e) => setPassword(e.target.value)} required />
+          <input
+            type="password"
+            className="form-control"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required />
         </div>
-        <button className="btn btn-primary">Login</button>
-        <p>Don't  have an account?<Link to="/register">Register here</Link></p>
+        <button type="submit" className="btn btn-primary">Login</button>
       </form>
     </div>
   );
-}
+};
 
 export default Login;

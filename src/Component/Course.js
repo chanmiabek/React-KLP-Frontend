@@ -1,85 +1,68 @@
-import React from "react";
-import {  useNavigate } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
+// import { Form, Button, Alert } from 'react-bootstrap';
+import study1 from '../Asset/image/study1.jpg';
 
-const Course = () => {
-
-    const navigate = useNavigate();
-
-    const handleEnrollClick = (course) => {
-      if (handleEnrollClick) {
-        navigate(`/enroll/${course.id}`);
-      } else {
-        // Option 1: Redirect to login with a message
-        alert('Please log in or register to enroll in this course.');
-        navigate('/login?redirect=/enroll/' + course.id);
-      }
-    };
-
-
-
-
-
-const CourseCard = ({ course }) => (
-  <div className="col-md-4 mb-4">
-    <div className="card h-100">
-      <div className="card-body">
-        <h5 className="card-title">{course.title}</h5>
-        <p className="card-text">{course.description}</p>
-        <button className="btn btn-primary" onClick={() => handleEnrollClick(course)}>
-          Enroll Now
-        </button>
-      </div>
-    </div>
-  </div>
-);
-
-const sampleCourses = [
-  {
-    id: 1,
-    title: "Data Analysis",
-    description: "Learn how to collect, organize, and analyze large amounts of data to gain insights and make informed decisions."
-  },
-  {
-    id: 2,
-    title: "Cybersecurity",
-    description: "Learn about the latest threats and vulnerabilities in the digital world and develop skills to protect yourself and your data."
-  },
-  {
-    id: 3,
-    title: "Digital Marketing",
-    description: "Learn how to create and execute effective marketing campaigns to reach and engage your target audience."
-  },
-  {
-    id: 4,
-    title: "Freelancing",
-    description: "Learn how to find and work with freelance opportunities to gain experience and build a portfolio of work."
-  },
-  {
-    id: 5,
-    title: "Fullstack Developer",
-    description: "Learn how to code and make website application.",
-  }
+const CourseCard = [
+    {
+    name:  "Python",
+    quote: "This LMS helped me learn React in just 2 weeks. The course structure is amazing!",
+    image: study1,
+    btn: "Enroll Now"
+    },
+    {
+    name: "JAVA",
+    quote: "Easy to use and access. I love how the content is well organized and interactive.",
+    image: study1,
+    btn: "Enroll Now"
+    },
+    {
+    name: "JAVASCRIPT",
+    quote: "Enrolling in this platform was the best decision. I can learn at my own pace!",
+    image: study1,
+    btn: "Enroll Now"
+    },
+    {
+    name: "C Language",
+    quote: "Enrolling in this platform was the best decision. I can learn at my own pace!",
+    image: study1,
+    btn: "Enroll Now"
+    }
 ];
 
-const CoursesCard = () => {
-  return (
-    <div className="container mt-4">
-      <h3 className="mb-4">Available Courses</h3>
-      <div className="row">
-        {sampleCourses.map((course) => (
-          <CourseCard key={course.id} course={course} />
-        ))}
-      </div>
-    </div>
-  );
-}
-
-    // Use the CoursesCard component to display the list of courses
+const Course = () => {
     return (
-      <div>
-        <CoursesCard />
-      </div>
+    <div className="my-5">
+        <h2 className="text-center mb-4">Learn Our Courses</h2>
+        <Link to="/apply" className="btn btn-primary text-center mb-4 justify-center">Apply Now</Link>
+        <div className="row">
+        {CourseCard.map((CourseCard, index) => (
+            <>
+                <div className="col-md-3 mb-3" key={index}>
+                    <div className="card h-100 shadow-sm p-3">
+                        <div className="text-center">
+                            <img
+                                src={CourseCard.image}
+                                alt={CourseCard.name}
+                                className="card-img-top img-fluid"
+                                style={{
+                                height:
+                                window.innerWidth < 768 ?'150px' : '250px',
+                                width:'100%',
+                                objectFit: 'cover'
+                              }}
+                            />
+                        </div>
+                        <h5 className="text-center">{CourseCard.name}</h5>
+                        <p className="text-center">{CourseCard.quote}</p>
+                        <p className="btn btn-primary text-center">{CourseCard.btn}</p>
+                    </div>
+                </div>
+            </>
+        ))}
+        </div>
+    </div>
     );
-  };
+};
 
 export default Course;

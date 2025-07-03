@@ -1,50 +1,51 @@
 /* src/components/Footer.css */
-footer {
-    background-color: #242ee6; /* Dark background */
-    color: #fff; /* White text */
-    padding: 10px 0;
-    text-align: center;
-    font-size: 0.9em;
-    margin-top: auto; /* Pushes the footer to the bottom if container is flex-column */
-    width: 100%; /* Ensure it spans full width */
-    bottom: 0; /* Stick to the bottom */
-    box-shadow: 0px -2px 5px #242ee6;
-    z-index: 1000; /* Ensure footer is above other content */
-
-}
-
-.footer-content {
-    max-width: 1200px; /* Adjust to match your main content width */
-    margin: 0 auto;
-    padding: 0 20px; /* Add some padding on the sides */
-}
-
-.footer-links {
-    margin-top: 15px;
-    margin-bottom: 10px;
-}
-
-.footer-links a {
-    color: #fff;
+.footer-link {
+    color: #ccc;
     text-decoration: none;
-    margin: 0 10px; /* Space out the links */
-    white-space: nowrap; /* Prevent links from breaking onto new lines too easily */
+    transition: color 0.3s ease;
 }
 
-.footer-links a:hover {
+.footer-link:hover {
+    color: #fff;
     text-decoration: underline;
 }
 
-footer p {
-    margin: 0; /* Remove default paragraph margin */
-    padding: 0;
-    font-size: 0.8em;
+.footer-icon {
+    color: #fff;
+    font-size: 1.4rem;
+    transition: transform 0.3s ease, color 0.3s ease;
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .footer-links a {
-        display: block; /* Stack links vertically on small screens */
-        margin: 5px 0;
+.footer-icon:hover {
+    color: #0d6efd;
+    transform: scale(1.2);
+}
+
+.back-to-top-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 25px;
+    background-color: #0d6efd;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    padding: 12px 14px;
+    font-size: 18px;
+    cursor: pointer;
+    z-index: 999;
+    transition: all 0.3s ease;
+}
+
+.back-to-top-btn:hover {
+    background-color: #084298;
+}
+
+.footer-klp {
+    flex-shrink: 0;
+}
+
+@media (max-width: 576px) {
+    .footer-klp {
+    text-align: center;
     }
 }

@@ -1,123 +1,95 @@
-import React from "react";
-import  { useState, useEffect } from "react";
-import AuthService from "../Service/AuthService";
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const Register = () => {
   const navigate = useNavigate();
-  const [inputs, setInputs] = useState({});
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+    confirmPassword: ''
+  });
 
-  const handleChange = (event) => {
-    const name = event.target.name;
-    const value = event.target.value;
-    setInputs(values => ({ ...values, [name]: value }));
+  const [errorMsg, setErrorMsg] = useState('');
+  const [successMsg, setSuccessMsg] = useState('');
+
+  const { email, password, confirmPassword } = formData;
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+    setErrorMsg('');
   };
 
-  const validateFormData = () => {
-    if (!inputs.fullName || !inputs.email || !inputs.password || !inputs.confirm) {
-      alert("Some fields are empty");
-      return false;
-    }
-    if (inputs.password !== inputs.confirm) {
-      alert("Passwords do not match");
-      return false;
-    }
-    return true;
-  };
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    if (!validateFormData()) {
-      return;
+    if (password !== confirmPassword) {
+      return setErrorMsg('Passwords do not match');
     }
+
     try {
-      AuthService.register(inputs.fullName, inputs.email, inputs.password);
-      // Send registration data to the backend API
-      console.log("Registering user:", inputs);
-      // Make sure the backend API is running and accessible
-      // Adjust the URL if your backend is hosted elsewhere
-      console.log("Sending registration request to backend API");
-      console.log("Inputs:", inputs);
-      console.log("Backend URL: http://localhost:8080/api/user/register");
-      console.log("Attempting to register user:", inputs.fullName);
-      console.log("Email:", inputs.email);
-      console.log("Password:", inputs.password);
-      console.log("Confirm Password:", inputs.confirm);
-      // Make the POST request to register the user
-      console.log("Sending POST request to backend API");
-      console.log("Request URL: http://localhost:8080/api/user/register");
-      console.log("Request Body:", inputs);
-      console.log("Headers: { 'Content-Type': 'application/json' }");
-      await axios.post('http://localhost:8080/api/user/register', inputs);
-      alert(inputs.fullName + " Registration successfully");
-      navigate('/login');
+      const res = await axios('/auth/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        data: { email, password },
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        localStorage.setItem('token', data.token);
+        setSuccessMsg('Registration successful! Redirecting...');
+        setTimeout(() => navigate('/dashboard'), 1000);
+      } else {
+        setErrorMsg(data.error || 'Registration failed');
+      }
     } catch (err) {
-      console.log("Something went wrong", err);
-      alert(err.response?.data?.message || "Registration failed");
+      setErrorMsg('Server error. Please try again.');
     }
   };
 
-  // Fetch all users from the backend API
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      navigate('/dashboard');
-    }
-  }, [navigate]);
   return (
-    <div style={{
-      backgroundColor: "white", width: "350px", height: "auto",
-      margin: "0 auto", padding: "20px", borderRadius: "50px", borderColor: "aquamarine", color: "blue", fontFamily: "Arial, sans-serif", fontSize: "16px", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
-      boxShadow: "0 2px 5px rgba(0,0,0,0.1)",
-      transition: "transform 0.3s ease",
-    }}>
-      <h1 style={{ textAlign: "center" }}>Sign up</h1>
+    <div className="container mt-5 col-md-6">
+      <h2 className="mb-4">Register</h2>
 
-      <form onSubmit={handleSubmit} style={{ margin: "0 auto", maxWidth: "100%" }}>
-        <label>Full Name:<br />
-          <input
-            type="text"
-            name="fullName"
-            value={inputs.fullName || ""}
-            onChange={handleChange}
-          />
-        </label><br />
+      {errorMsg && <div className="alert alert-danger">{errorMsg}</div>}
+      {successMsg && <div className="alert alert-success">{successMsg}</div>}
 
-        <label>Email:<br />
+      <form onSubmit={handleSubmit}>
+        <div className="form-group mb-3">
+          <label>Email</label>
           <input
             type="email"
+            className="form-control"
             name="email"
-            value={inputs.email || ""}
+            value={email}
             onChange={handleChange}
-          />
-        </label><br />
+            required />
+        </div>
 
-        <label>Password:<br />
+        <div className="form-group mb-3">
+          <label>Password</label>
           <input
             type="password"
+            className="form-control"
             name="password"
-            value={inputs.password || ""}
+            value={password}
             onChange={handleChange}
-            required
-          />
-        </label><br />
+            required />
+        </div>
 
-        <label>Confirm Password:<br />
+        <div className="form-group mb-4">
+          <label>Confirm Password</label>
           <input
             type="password"
-            name="confirm"
-            value={inputs.confirm || ""}
+            className="form-control"
+            name="confirmPassword"
+            value={confirmPassword}
             onChange={handleChange}
-          />
-        </label><br />
-        <br />
-        <button type="submit" className="btn btn-primary" formMethod="post">
-          Sign Up
-        </button>
-        <p>Already have an account? <Link to="/login">Login here</Link></p>
-            <p className="text-muted">By signing up, you agree to our <a href="/terms">Terms of Service</a> and <a href="/privacy">Privacy Policy</a>.
-          </p>
+            required />
+        </div>
+
+        <button type="submit" className="btn btn-success w-100">Register</button>
       </form>
     </div>
   );

@@ -6,7 +6,7 @@ import Alert from 'react-bootstrap/Alert';
 
 // import {  useNavigate } from "react-router-dom";
 
-const Course = () => {
+const Apply = () => {
 
     // const navigate = useNavigate();
 
@@ -54,7 +54,7 @@ const CourseForm = () => {
 
   return (
     <div className="container my-5">
-      <h2 className="text-center mb-4">Add New Course</h2>
+      <h2 className="text-center mb-4  text-primary">Apply for New Course</h2>
 
       {submitted && <Alert variant="success">Course added successfully!</Alert>}
 
@@ -140,11 +140,6 @@ const CourseForm = () => {
 
 }
 
-      //   // Use the CoursesCard component to display the list of courses
-      //   return (
-      //     <div>
-      //       <CourseForm />
-      //     </div>
   return (
     <div>
       <CourseForm />
@@ -152,4 +147,4 @@ const CourseForm = () => {
   );
 }
 
-export default Course;
+export default Apply;
