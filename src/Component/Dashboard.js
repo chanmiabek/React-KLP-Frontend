@@ -1,91 +1,59 @@
-import React, { useEffect, useState } from "react";
-import { BrowserRouter as  useNavigate } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
-import axios from "axios";
-// import "bootstrap-icons/font/bootstrap-icons.css";
+import React from 'react';
+import { Container, Row, Col, Card } from 'react-bootstrap';
+import Sidebar from './Component/Sidebar';
+import Layout from './Component/Layout';
+import CourseCard from './Component/CourseCard';
 
-// Dashboard Card Component
-function DashboardCard({ title, value, icon, bg }) {
-    return (
-    <div className={`col-md-3 mb-4`}>
-        <div className={`card text-white bg-${bg} h-100`}>
-        <div className="card-body d-flex align-items-center justify-content-between">
-            <div>
-            <h5>{title}</h5>
-            <h3>{value}</h3>
-            </div>
-            <i className={`bi ${icon} fs-1`}></i>
-        </div>
-        </div>
-    </div>
-    );
-}
+const Dashboard = () => {
+  const courseCard = [
+    {
+      title: "React Basics",
+      progress: 80,
+      instructor: "Jane Doe",
+    },
+    {
+      title: "Node.js & Express",
+      progress: 50,
+      instructor: "John Smith",
+    },
+  ];
 
-// Dashboard Page
-function Dashboard() {
-    const navigate = useNavigate();
-    const [user, setUser] = useState(null);
+  return (
+    <>
+      <Layout />
+      <Container fluid>
+        <Row>
+          <Col md={2}><Sidebar /></Col>
 
-    useEffect(() => {
-    const token = localStorage.getItem("authToken");
-    axios("http://localhost:8080/api/dashboard", {
-        headers: {
-        Authorization: `Bearer ${token}`,
-        },
-    })
-        .then((res) => {
-        if (res.status === 401) {
-                navigate("/login");
-        }
-        return res.json();
-        })
-        .then((data) => setUser(data.user))
-        .catch(() => navigate("/login"));
-    }, [navigate]);
+          <Col md={10}>
+            <h2 className="mt-3">Dashboard</h2>
 
-    const handleLogout = () => {
-    localStorage.removeItem("authToken");
-    navigate("/login");
-    };
+            {/* Course Cards */}
+            <Row className="mt-4">
+              {courseCard.map((courseCard, idx) => (
+                <Col md={6} key={idx}>
+                  <CourseCard course={courseCard} />
+                </Col>
+              ))}
+            </Row>
 
-    if (!user) return <p>Loading...</p>;
-
-    return (
-    <div className="container-fluid p-4">
-        <div className="d-flex justify-content-between align-items-center mb-4">
-        <h2>Welcome, {user.name}</h2>
-        <button className="btn btn-danger" onClick={handleLogout}>Logout</button>
-        </div>
-
-        <div className="row">
-        <DashboardCard title="Total Students" value="1,240" icon="bi-people" bg="primary" />
-        <DashboardCard title="Courses" value="34" icon="bi-book" bg="success" />
-        <DashboardCard title="Instructors" value="18" icon="bi-person-badge" bg="info" />
-        <DashboardCard title="Active Sessions" value="7" icon="bi-lightning" bg="warning" />
-    </div>
-
-        <div className="row mt-4">
-        <div className="col-md-8">
-            <div className="card">
-            <div className="card-header">Student Enrollment Trends</div>
-            <div className="card-body">
-                <p>Chart or graph can go here (e.g., Recharts or Chart.js)</p>
-            </div>
-            </div>
-        </div>
-        <div className="col-md-4">
-            <div className="card">
-            <div className="card-header">Recent Activities</div>
-            <ul className="list-group list-group-flush">
-                <li className="list-group-item">Yar registered for HTML course</li>
-                <li className="list-group-item">New course: React Basics added</li>
-                <li className="list-group-item">Admin updated user permissions</li>
-            </ul>
-            </div>
-        </div>
-        </div>
-    </div>
-    );
-}
+            {/* Announcements */}
+            <Row className="mt-5">
+              <h4>📢 Announcements</h4>
+              <Card>
+                <Card.Body>
+                  <Card.Title>System Update</Card.Title>
+                  <Card.Text>
+                    The KLP platform will be down for maintenance on Sunday.
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+            </Row>
+          </Col>
+        </Row>
+      </Container>
+    </>
+  );
+};
 
 export default Dashboard;

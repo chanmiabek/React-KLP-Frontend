@@ -53,7 +53,7 @@ const scrollToTop = () => {
         </div>
 
           {/* Quick Links */}
-            <div className="col-md-4">
+            <div className="col-md-4 d-flex-block">
             <h5 className="fw-semibold">Quick Links</h5>
             <ul className="list-unstyled">
                 <li><Link to="/" className="footer-link">Home</Link></li>
@@ -76,7 +76,7 @@ const scrollToTop = () => {
             </button>
             </form>
 
-            <div className="d-flex gap-3 mt-4">
+            <div className="d-block gap-3 mt-4">
                 <a href="https://facebook.com" target="_blank" rel="noreferrer" className="footer-icon"><FaFacebook /></a>
                 <a href="https://twitter.com" target="_blank" rel="noreferrer" className="footer-icon"><FaTwitter /></a>
                 <a href="https://instagram.com" target="_blank" rel="noreferrer" className="footer-icon"><FaInstagram /></a>

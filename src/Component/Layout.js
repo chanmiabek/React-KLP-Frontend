@@ -42,6 +42,12 @@ const Layout = () => {
             <li className="nav-item">
               <Link className="nav-link" to="/contact">Contact</Link>
             </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/forum">Forum</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/account">Account</Link>
+            </li>
           </ul>
 
           {/* Auth buttons */}

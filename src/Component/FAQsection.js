@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react';
 const FAQ = () => {
     return (
     <div className="container my-5">

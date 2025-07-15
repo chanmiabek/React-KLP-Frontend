@@ -1,5 +1,6 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import image3 from '../Asset/image/image3.jpg';
 
 const Carousel = () => {
     return (
@@ -8,8 +9,16 @@ const Carousel = () => {
         <div id="testimonialCarousel" className="carousel slide" data-bs-ride="carousel">
         <div className="carousel-inner text-center">
             <div className="carousel-item active">
-            <blockquote>"This platform changed my life. I gained skills and confidence!"</blockquote>
-            <footer>- Amina L., Student</footer>
+                <img src={image3} alt="Student Testimonial" className="d-block w-100 img-fluid"
+                                style={{
+                                    // filter: 'brightness(70%)',
+                                    // transition: 'transform 0.5s ease',
+                                    objectFit: 'cover'
+                                }} />
+            <div >
+                <blockquote className='top-20 start-20 d-block w-100 img-fluid translate-middle text-black text-center p-3'>"This platform changed my life. I gained skills and confidence!"</blockquote>
+                <footer>- Amina L., Student</footer>
+            </div>
             </div>
             <div className="carousel-item">
             <blockquote>"I got a job thanks to the training I received at KLP."</blockquote>

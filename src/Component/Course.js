@@ -1,19 +1,23 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-// import { Form, Button, Alert } from 'react-bootstrap';
+import ComputerStudentImage from '../Asset/image/Computer-Students.jpg';
 import study1 from '../Asset/image/study1.jpg';
+import StudentSelfStudy from '../Asset/image/Student-Selfstudy.jpg';
+import BannerImg from '../Asset/image/image4.jpg';
 
-const CourseCard = [
+
+const Course = () => {
+    const CourseCard = [
     {
     name:  "Python",
     quote: "This LMS helped me learn React in just 2 weeks. The course structure is amazing!",
-    image: study1,
+    image: ComputerStudentImage,
     btn: "Enroll Now"
     },
     {
     name: "JAVA",
     quote: "Easy to use and access. I love how the content is well organized and interactive.",
-    image: study1,
+    image: StudentSelfStudy,
     btn: "Enroll Now"
     },
     {
@@ -29,12 +33,14 @@ const CourseCard = [
     btn: "Enroll Now"
     }
 ];
-
-const Course = () => {
     return (
+    <>
+      <div className="container-fluid p-0">
+        <img src={BannerImg} alt="Courses Banner" className="w-100 mb-4" style={{ maxHeight: '300px', objectFit: 'cover' }} />
+      </div>
     <div className="my-5">
         <h2 className="text-center mb-4">Learn Our Courses</h2>
-        <Link to="/apply" className="btn btn-primary text-center mb-4 justify-center">Apply Now</Link>
+        <p className="text-center mb-5">Explore our wide range of courses designed to help you succeed in your career.</p>
         <div className="row">
         {CourseCard.map((CourseCard, index) => (
             <>
@@ -50,7 +56,7 @@ const Course = () => {
                                 window.innerWidth < 768 ?'150px' : '250px',
                                 width:'100%',
                                 objectFit: 'cover'
-                              }}
+                            }}
                             />
                         </div>
                         <h5 className="text-center">{CourseCard.name}</h5>
@@ -62,6 +68,7 @@ const Course = () => {
         ))}
         </div>
     </div>
+    </>
     );
 };
 

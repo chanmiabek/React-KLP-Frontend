@@ -57,7 +57,14 @@ const About = () => {
             </div>
             <div className="container my-5">
                 {formData.imageUrl && <img src={formData.imageUrl} alt="About" className="img-fluid my-3" />}
-
+                <h3 className="text-center mb-4">Gallery</h3>
+                <div className="row g-3">
+                    {[require('../Asset/image/Student-Library.jpg'), require('../Asset/image/Student-science1.jpg'), require('../Asset/image/Student-Selfstudy.jpg'), require('../Asset/image/Graduate-Students.jpg')].map((img, idx) => (
+                        <div className="col-6 col-md-3" key={idx}>
+                            <img src={img} alt="About Gallery" className="img-fluid rounded shadow-sm" style={{height: '180px', objectFit: 'cover', width: '100%'}} />
+                        </div>
+                    ))}
+                </div>
             </div>
             <Testimonial />
 
