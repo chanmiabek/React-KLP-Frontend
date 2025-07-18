@@ -1,12 +1,13 @@
 // src/components/Login.js
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const Login = () => {
   const [form, setForm] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -14,27 +15,33 @@ const Login = () => {
     setSuccess(false);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!form.email || !form.password) {
       setError('Both fields are required');
       setSuccess(false);
       return;
     }
-    // Simulate API call
-    axios.post('http://localhost:8082', form)
-      .then(() => {
-        setSuccess(true);
-        setError('');
-        setForm({ email: '', password: '' });
-      })
-      .catch(() => {
-        setError('Login failed. Please check your credentials.');
-        setSuccess(false);
+    try {
+      // Adjust the URL to your backend login endpoint
+      const response = await axios.post('http://localhost:8080/api/user/login', {
+        email: form.email,
+        password: form.password,
       });
+      // Save user/token as needed
+      console.log('Login successful:', response.data);
+      localStorage.setItem('user', JSON.stringify(response.data));
+      setSuccess(true);
+      setError('');
+      setForm({ email: '', password: '' });
+      setTimeout(() => {
+        navigate('/dashboard');
+      }, 1000);
+    } catch (err) {
+      setError('Login failed. Please check your credentials.');
+      setSuccess(false);
+    }
   };
-
-  useEffect(() => {}, []);
 
   return (
     <div className="container mt-5">
@@ -42,7 +49,7 @@ const Login = () => {
         <form onSubmit={handleSubmit}>
           <h2 className="text-center">Login</h2>
           {error && <div className="alert alert-danger">{error}</div>}
-          {success && <div className="alert alert-success">Login successful!</div>}
+          {success && <div className="alert alert-success">Login successful! Redirecting...</div>}
           <div className="mb-3">
             <label>Email address</label>
             <input type="email" className="form-control" name="email" placeholder="Enter email" value={form.email} onChange={handleChange} />

@@ -1,15 +1,27 @@
+import { useNavigate } from 'react-router-dom';
 import React from 'react';
 import { Nav } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
-const Sidebar = () => {
+const SidebarNav = ({ onLinkClick }) => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    // Clear auth token or session here
+    localStorage.removeItem("token");
+    navigate("/Home");
+    if (onLinkClick) onLinkClick(); // Close sidebar on mobile if open
+  };
+
   return (
-    <Nav defaultActiveKey="/dashboard" className="flex-column bg-light p-3 vh-100 shadow-sm">
-      <Nav.Link href="/dashboard">🏠 Dashboard</Nav.Link>
-      <Nav.Link href="/courses">📘 My Courses</Nav.Link>
-      <Nav.Link href="/progress">📈 Progress</Nav.Link>
-      <Nav.Link href="/settings">⚙️ Settings</Nav.Link>
+    <Nav defaultActiveKey="/dashboard" className="flex-column">
+      <Nav.Link as={Link} to="/dashboard" onClick={onLinkClick}>🏠 Dashboard</Nav.Link>
+      <Nav.Link as={Link} to="/course" onClick={onLinkClick}>📘 My Courses</Nav.Link>
+      <Nav.Link as={Link} to="/progress" onClick={onLinkClick}>📈 Progress</Nav.Link>
+      <Nav.Link as={Link} to="/account" onClick={onLinkClick}>👤 Account</Nav.Link>
+      <Nav.Link as={Link} to="/setting" onClick={onLinkClick}>⚙️ Settings</Nav.Link>
+      <Nav.Link onClick={handleLogout} className="text-danger mt-3">🚪 Logout</Nav.Link>
     </Nav>
   );
 };
-
-export default Sidebar;
+export default SidebarNav;

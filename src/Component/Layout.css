@@ -78,3 +78,59 @@ ul li a:hover{
   }
 }
 
+.hover-zoom:hover {
+    transform: scale(1.03);
+    transition: transform 0.3s ease;
+}
+.hover-zoom:hover {
+    transform: scale(1.03);
+} 
+.hover-scale:hover {
+    transform: scale(1.05);
+    background-color: #ffffff10;
+    transition: all 0.3s ease-in-out;
+}
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 250px; /* adjust as needed */
+  background-color: #f8f9fa;
+  z-index: 1000;
+  padding: 1rem;
+  overflow-y: auto;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.main-content {
+  /*margin-left: 250px; /* match sidebar width */
+  padding: 1rem;
+}
+
+.hero-banner {
+  position: relative;
+  height: 300px;
+  width: 100%;
+  overflow: hidden;
+}
+
+.hero-banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.banner-text {
+  position: absolute;
+  right: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  font-weight: bold;
+  color: #007bff;
+}
+
+

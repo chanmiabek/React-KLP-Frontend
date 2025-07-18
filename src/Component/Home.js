@@ -35,7 +35,7 @@ const Home = () => {
             loop
             playsInline
             className="position-absolute w-100 h-100 object-fit-cover"
-            style={{ zIndex: -2, filter: 'brightness(60%)' }}
+            style={{ zIndex: -2, filter: 'brightness(100%)' }}
           >
             <source src={KakumaFallback} type="video/mp4" />
           </video>
@@ -111,15 +111,23 @@ const Home = () => {
       </div>
 
       {/* Success Stories Section */}
-      <div className="container my-5">
+      <div className="container my-5"  >
         <h3 className="text-center mb-4">Success Stories</h3>
-        <div className="row">
+        <div className="row"
+           
+            //onMouseOver={(e) => e.currentTarget.style.transform= 'scale(1.2)'}
+            //onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
+        >
+
           {[
             { name: 'Mary A.', story: 'After joining KLP, I landed my first remote job as a web developer!', img: require('../Asset/image/Freelencer.jpg') },
             { name: 'James K.', story: 'KLP helped me pass my university entrance exams with flying colors.', img: require('../Asset/image/Graduate-Students.jpg') },
             { name: 'Fatima S.', story: 'I started my own tutoring group after learning online with KLP.', img: require('../Asset/image/student-testimonial1.jpg') },
           ].map((s, idx) => (
-            <div className="col-md-4 mb-3" key={idx}>
+            <div className="col-md-4 mb-3" key={idx} 
+            onMouseOver={(e) => e.currentTarget.style.transform= 'scale(1.2)'}
+            onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
+            >
               <div className="card h-100 shadow-sm p-3">
                 <div className="text-center">
                   <img src={s.img} alt={s.name} className="rounded-circle mb-3" style={{ width: '80px', height: '80px', objectFit: 'cover' }} />

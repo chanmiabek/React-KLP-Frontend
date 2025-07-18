@@ -10,14 +10,21 @@ import Register from './Component/Register';
 import Apply from './Component/Apply';
 import './Component/Layout.css';
 import LearnMore from './Component/LearnMore';
-// import Dashboard from './Component/Dashboard';
+import Dashboard from './Component/Dashboard';
 import ProtectedRoute from './Component/ProtectedRoute';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import NotFound from './Component/NotFound';
 import Carousel from './Component/Carousel';
 import FAQsection from './Component/FAQsection';
 import FeatureCard from './Component/FeatureCard';
-// import Sidebar from './Component/Sidebar';
+import Sidebar from './Component/Sidebar';
+import Setting from './Administrator/setting';
+import Logout from './Administrator/Logout';
+import Account from './Administrator/Account';
+import Forum from './Component/Forum';
+import  Progress from './Component/Progress';
+import Notification from './Component/Notification';
+
 
 
 function App() {
@@ -33,15 +40,24 @@ function App() {
           <Route path="Course" element={<Course />} />
           <Route path="login" element={<Login />} />
           <Route path="Apply" element={<Apply />} />
-          {/* <Route path="dashboard" element={<Dashboard />} /> */}
+          <Route path="dashboard" element={<Dashboard />} /> 
           <Route path="learnMore" element={<LearnMore />} />
           <Route path="FeatureCard" element={<FeatureCard />} />
           <Route path="Carousel" element={<Carousel />} />
           <Route path="FAQsection" element={<FAQsection />} />
-          {/* <Route path="Sidebar" element={<Sidebar />} /> */}
-          <Route path="NotFound" element={<NotFound />} />
+          <Route path="Sidebar" element={<Sidebar />} />
+          <Route path="Account" element={<Account />} />
+          <Route path="Setting" element={<Setting />} />
+          <Route path="Forum" element={<Forum />} />
+          <Route path="Logout" element={<Logout />} />
+          <Route path="progress" element={<Progress />} />
+          <Route path="Notification" element={<Notification />} />
+          {/* Protected Routes */}
+          <Route path="ProtectedRoute" element={<ProtectedRoute />} />
+          {/* Catch-all for 404 Not Found */}
+          <Route path="*" element={<NotFound />} />
         </Route>
-        {/* <Route path="/" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} /> */}
+        <Route path="/" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
         <Route path="/courses" element={<ProtectedRoute><Course /></ProtectedRoute>} />
         <Route path="/login" element={<Login />} />
     </Routes>

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './Layout.css';
 
 const mockUser = {
-  name: 'John Doe',
+  name: '',
   email: 'john.doe@example.com',
   bio: 'Passionate learner and community member.',
 };

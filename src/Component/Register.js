@@ -5,7 +5,7 @@ import axios from 'axios';
 
 const Register = () => {
   const [form, setForm] = useState({
-    name: '',
+    fullName: '',
     email: '',
     password: '',
     confirmPassword: '',
@@ -15,13 +15,13 @@ const Register = () => {
   const [success, setSuccess] = useState(false);
 
   const validateForm = () => {
-    if (!form.name || !form.email || !form.password || !form.confirmPassword || !form.phone) {
+    if (!form.fullName || !form.email || !form.password || !form.confirmPassword || !form.phone) {
       return 'All fields are required';
     }
     if (!form.email.includes('@')) {
       return 'Invalid email';
     }
-    if (form.password.length < 6) {
+    if (form.password.length  < 6) {
       return 'Password must be at least 6 characters';
     }
     if (form.password !== form.confirmPassword) {
@@ -48,13 +48,13 @@ const Register = () => {
       return;
     }
     // Simulate API call
-    axios.post('http://localhost:3000', form)
+    axios.post('http://localhost:8080/api/user/register', form)
       .then(() => {
         setSuccess(true);
         setError('');
-        setForm({ name: '', email: '', password: '', confirmPassword: '', phone: '' });
+        setForm({ fullName: '', email: '', password: '', confirmPassword: '', phone: '' });
       })
-      .catch(() => {
+      .catch((err) => {
         setError('Registration failed. Please try again.');
         setSuccess(false);
       });
@@ -71,7 +71,7 @@ const Register = () => {
           {success && <div className="alert alert-success">Registration successful!</div>}
           <div className="mb-3">
             <label>Full Name</label>
-            <input type="text" className="form-control" name="name" placeholder="Enter full name" value={form.name} onChange={handleChange} />
+            <input type="text" className="form-control" name="fullName" placeholder="Enter full name" value={form.fullName} onChange={handleChange} />
           </div>
           <div className="mb-3">
             <label>Email address</label>

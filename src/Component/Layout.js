@@ -7,7 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 const Layout = () => {
   return (
     <>
-    <nav className="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm w-100">
       <div className="container">
         {/* Logo */}
         <span><img src="https://cdn-icons-png.flaticon.com/512/1055/1055646.png" alt="logo" height={50} width={50} /></span>
@@ -37,17 +37,12 @@ const Layout = () => {
               <Link className="nav-link" to="/about">About</Link>
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/courses">Courses</Link>
+              <Link className="nav-link" to="/course">Courses</Link>
             </li>
             <li className="nav-item">
               <Link className="nav-link" to="/contact">Contact</Link>
             </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/forum">Forum</Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/account">Account</Link>
-            </li>
+           
           </ul>
 
           {/* Auth buttons */}
