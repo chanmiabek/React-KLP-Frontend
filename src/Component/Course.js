@@ -1,11 +1,11 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 import ComputerStudentImage from '../Asset/image/Computer-Students.jpg';
 import study1 from '../Asset/image/study1.jpg';
 import StudentSelfStudy from '../Asset/image/Student-Selfstudy.jpg';
 import BannerImg from '../Asset/image/image4.jpg';
 import { useAuth } from '../contexts/AuthContexts';
-import Sidebar from '../Component/Sidebar';
+//import Sidebar from '../Component/Sidebar';
 
 
 const Course = () => {
@@ -80,16 +80,7 @@ const Course = () => {
           Unlock your potential at <b>KAKUMA LEARNING PLATFORM</b>
         </div>
       </div>
-
-      <div className="my-5">
-        <h2 className="text-center mb-4">Learn Our Courses</h2>
-        <p className="text-center mb-5">Explore our wide range of courses designed to help you succeed in your career.</p>
-        
-        <div className="row">
-          {/* Your course cards here */}
         </div>
-      </div>
-    </div>
     <div className="my-5">
         <h2 className="text-center mb-4">Learn Our Courses</h2>
         <p className="text-center mb-5">Explore our wide range of courses designed to help you succeed in your career.</p>
@@ -114,12 +105,10 @@ const Course = () => {
                                 boxShadow: '0 2px 4px rgba(0,0,0    ,0.1)',
                                 transition: 'transform 0.3s ease',                  
                                 cursor: 'pointer',
+                                margin: '10px 0',
+                                
                                 
                             }}
-                            //onClick={handleEnroll}
-                           // onMouseOver={(e) => e.currentTarget.style.transform= 'scale(1.05)'}
-                            //onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
-                                
                             
                         />
                     </div>
@@ -130,9 +119,7 @@ const Course = () => {
                             className="btn btn-primary w-75"
                             style={{ fontWeight: 'bold', fontSize: '1rem' }}
                             onClick={handleEnroll}
-                            //onMouseOver={(e) => e.currentTarget.style.transform= 'scale(1.05)'}
-                            //onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
-
+                          
                         >
                             {course.btn}
                         </button>

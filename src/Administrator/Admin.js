@@ -1,57 +1,35 @@
-// KLP Admin Dashboard using React and Bootstrap
-import React from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
+// Example: AdminSidebar.js
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+import { useAuth } from '../contexts/AuthContext'; // Assuming this provides userRole
 
-function DashboardCard({ title, value, icon, bg }) {
+const AdminSidebar = () => {
+    const { userRole } = useAuth();
+
     return (
-    <div className={`col-md-3 mb-4`}>
-        <div className={`card text-white bg-${bg} h-100`}>
-        <div className="card-body d-flex align-items-center justify-content-between">
-            <div>
-            <h5>{title}</h5>
-            <h3>{value}</h3>
-            </div>
-            <i className={`bi ${icon} fs-1`}></i>
-        </div>
-        </div>
-    </div>
-    );
-}
+        <div className="d-flex flex-column p-3 bg-dark text-white" style={{ width: '280px', height: '100vh' }}>
+            <a href="/admin" className="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+                <span className="fs-4">KLP Admin</span>
+            </a>
+            <hr />
+            <ul className="nav nav-pills flex-column mb-auto">
+                <li><NavLink to="/admin" className="nav-link text-white" end>Dashboard</NavLink></li>
 
-function Admin() {
-    return (
-    <div className="container-fluid p-4">
-        <h2 className="mb-4">Kakuma Learning Platform Admin Dashboard</h2>
-
-        <div className="row">
-        <DashboardCard title="Total Students" value="1,240" icon="bi-people" bg="primary" />
-        <DashboardCard title="Courses" value="34" icon="bi-book" bg="success" />
-        <DashboardCard title="Instructors" value="18" icon="bi-person-badge" bg="info" />
-        <DashboardCard title="Active Sessions" value="7" icon="bi-lightning" bg="warning" />
-        </div>
-
-        <div className="row mt-4">
-        <div className="col-md-8">
-            <div className="card">
-            <div className="card-header">Student Enrollment Trends</div>
-            <div className="card-body">
-                <p>Chart or graph can go here (e.g., Recharts or Chart.js)</p>
-            </div>
-            </div>
-        </div>
-        <div className="col-md-4">
-            <div className="card">
-            <div className="card-header">Recent Activities</div>
-            <ul className="list-group list-group-flush">
-                <li className="list-group-item">Yar registered for HTML course</li>
-                <li className="list-group-item">New course: React Basics added</li>
-                <li className="list-group-item">Admin updated user permissions</li>
+                {(userRole === 'super_admin' || userRole === 'user_admin') && (
+                    <li><NavLink to="/admin/users" className="nav-link text-white">User Management</NavLink></li>
+                )}
+                {(userRole === 'super_admin' || userRole === 'course_admin') && (
+                    <li><NavLink to="/admin/courses" className="nav-link text-white">Course Management</NavLink></li>
+                )}
+                {(userRole === 'super_admin' || userRole === 'finance_admin') && (
+                    <li><NavLink to="/admin/reports" className="nav-link text-white">Reports</NavLink></li>
+                )}
+                {/* Add more links based on roles */}
             </ul>
-            </div>
+            <hr />
+            {/* Logout link/button */}
         </div>
-        </div>
-    </div>
     );
-}
+};
 
-
+export default AdminSidebar;

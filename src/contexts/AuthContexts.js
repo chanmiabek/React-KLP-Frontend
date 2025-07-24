@@ -24,8 +24,8 @@ export const AuthProvider = ({ children }) => {
         setLoading(false);
     }, []);
 
-    const login = async (username, password) => {
-        const userData = await authService.login(username, password);
+    const login = async (fullName, password) => {
+        const userData = await authService.login(fullName, password);
         setUser(userData);
         return userData;
     };
@@ -35,8 +35,8 @@ export const AuthProvider = ({ children }) => {
         setUser(null);
     };
 
-    const register = async (username, email, password) => {
-        await authService.register(username, email, password);
+    const register = async (fullName, email, password) => {
+        await authService.register(fullName, email, password);
         // Optionally log in after registration, or redirect to login page
     };
 
