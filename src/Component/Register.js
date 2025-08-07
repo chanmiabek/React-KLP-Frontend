@@ -65,7 +65,7 @@ const Register = () => {
     setSuccess(false); // Clear previous success messages
 
     try {
-      const response = await axios.post('http://localhost:8080/api/user/register', form);
+      const response = await axios.post('https://backend-api-1-awol.onrender.com/api/user/register', form);
       console.log('Registration successful:', response.data);
 
       // Check if your backend explicitly sends a success status, e.g., response.data.status === '00'

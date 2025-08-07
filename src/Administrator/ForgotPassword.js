@@ -44,7 +44,7 @@ const ForgotPassword = () => {
 
         try {
             // Replace with your actual backend API endpoint
-            const response = await axios.post('http://localhost:8080/api/user/forgot-password', {
+            const response = await axios.post('https://backend-api-1-awol.onrender.com/api/user/forgot-password', {
                 token,
                 newPassword: password,
             });

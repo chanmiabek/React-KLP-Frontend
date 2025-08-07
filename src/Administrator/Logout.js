@@ -7,7 +7,7 @@ const Logout = () => {
   const handleLogout = async () => {
     try {
       // 1. Call the server's logout endpoint
-      await axios('http://localhost/api/user/logout', { method: 'POST', withCredentials: true });
+      await axios('https://backend-api-1-awol.onrender.com/api/user/logout', { method: 'POST', withCredentials: true });
 
       // 2. Clear client-side data
       localStorage.removeItem('userToken');
