@@ -72,7 +72,7 @@ const Course = () => {
     };
     return (
 <>
-
+<div className='text-center justify-center my-2 mx-2 '>
     <div className="main-content">
       <div className="hero-banner">
         <img src={BannerImg} alt="Courses Banner" />
@@ -86,12 +86,12 @@ const Course = () => {
         <p className="text-center mb-5">Explore our wide range of courses designed to help you succeed in your career.</p>
         <div className="row">
         {CourseCard.map((course, index) => (
-            <div className="col-12 col-sm-6 col-md-4 col-lg-3 mb-3"  key={index}   
+            <div className="col-12 col-sm-6 col-md-5 col-lg-5 mb-4 text-center m-12"  key={index}   
                  onMouseOver={(e) => e.currentTarget.style.transform= 'scale(1.1)'}
                  onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
                             >
                 
-                <div className="card h-100 w-100 shadow-sm p-0">
+                <div className="card h-100 w-100 shadow-sm p-1 text-center">
                     <div className="text-center">
                         <img
                             src={course.image}
@@ -128,6 +128,7 @@ const Course = () => {
             </div>
         ))}
         </div>
+    </div>
     </div>
     </>
     );

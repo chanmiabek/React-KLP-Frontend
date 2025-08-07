@@ -44,7 +44,7 @@ const ForgotPassword = () => {
 
         try {
             // Replace with your actual backend API endpoint
-            const response = await axios.post('http://localhost:5000/api/user/forgot-password', {
+            const response = await axios.post('http://localhost:8080/api/user/forgot-password', {
                 token,
                 newPassword: password,
             });

@@ -2,13 +2,13 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { Container, Form, Button, Alert, Spinner } from 'react-bootstrap'; // Import Bootstrap components
+import { Container, Form, Button, Alert, Spinner } from 'react-bootstrap';
 
 const Login = () => {
-  const [form, setForm] = useState({ email: '', password: '', role: 'student' }); // Added role
+  const [form, setForm] = useState({ email: '', password: '', role: 'student' });
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
-  const [loading, setLoading] = useState(false); // New loading state for button
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -19,60 +19,77 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!form.email || !form.password || !form.role) { // Validate all fields including role
+    if (!form.email || !form.password || !form.role) {
       setError('All fields are required');
       setSuccess(false);
       return;
     }
 
-    setLoading(true); // Set loading to true
-    setError('');      // Clear previous messages
-    setSuccess(false); // Clear previous messages
+    setLoading(true);
+    setError('');
+    setSuccess(false);
 
     try {
-      // IMPORTANT: Adjust the URL to your actual backend login endpoint.
-      const response = await axios.post('http://localhost:8080/api/user/login', {
+    
+      const response = await axios.post("http://localhost:8080/api/user/login", {
         email: form.email,
         password: form.password,
-        role: form.role, // Send the selected role to the backend
+        role: form.role,
       });
 
-      console.log('Login successful:', response.data);
-      localStorage.setItem('user', JSON.stringify(response.data)); // Save user data/token
-      setSuccess(true);
-      setForm({ email: '', password: '', role: '' }); // Clear form and reset role
+      const data = response.data;
 
-      // Redirect based on role or a generic dashboard
-    
-      const userRole = response.data.role; 
-      setTimeout(() => {
-        if (userRole === 'instructor') {
-          navigate('/instructorDashboard');
-        } else if (userRole === 'student') {
-          navigate('/studentDashboard');
-        } else {
-          navigate('/'); // Fallback for other roles or generic dashboard
-        }
-      }, 1000); // Give user time to see success message
+      console.log('Login successful, response data:', data);
+
+      
+      if (data.status === '00' || data.success) { 
+        setSuccess(true);
+        setError(''); 
+
+      
+        localStorage.setItem('loggedInUser', JSON.stringify(data.user));
+        localStorage.setItem("token", data.token); // Store token for authenticated requests);
+        localStorage.setItem("role", data.role); // Store token for authenticated requests);
+
+
+      
+        setForm({ email: '', password: '', role: 'student' }); 
+
+        const userRole = data.user ? data.user.role : form.role; 
+        setTimeout(() => {
+          if (userRole === 'instructor') {
+            navigate('/instructorDashboard');
+          } else if (userRole === 'student') {
+            navigate('/student');
+          } else {
+            navigate('/dashboard');
+            console.warn('Unknown user role or role not provided in login response, redirecting to home.');
+          }
+        }, 1000); // 1-second delay to show "Login successful! Redirecting..."
+      } else {
+        setError(data.message || 'Login failed. Please check your credentials and selected role.');
+        setSuccess(false);
+      }
     } catch (err) {
+      // 5. Improved error handling for network issues or server errors
       console.error('Login failed:', err.response?.data || err.message);
-      setError(err.response?.data?.message || 'Login failed. Please check your credentials and selected role.');
+      setError(err.response?.data?.message || 'Login failed. Network error or server unavailable. Please try again.');
       setSuccess(false);
     } finally {
-      setLoading(false); // Always set loading to false
+      setLoading(false); 
     }
   };
 
   return (
     <Container className="d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
       <div className="p-4 border rounded shadow-sm bg-white" style={{ maxWidth: '450px', width: '100%' }}>
-        <h2 className="mb-4 text-center text-primary">Login</h2> {/* Changed color-blue to text-primary */}
+        <h2 className="mb-4 text-center text-primary">Login</h2>
         <Form onSubmit={handleSubmit}>
           {error && <Alert variant="danger" className="mb-3">{error}</Alert>}
           {success && <Alert variant="success" className="mb-3">Login successful! Redirecting...</Alert>}
 
           <Form.Group className="mb-3" controlId="formEmail">
-            <Form.Label className='fw-bold'>Email address</Form.Label> {/* Used fw-bold for font-bold */}
+            <Form.Label className='fw-bold'>Email address</Form.Label>
             <Form.Control
               type="email"
               name="email"
@@ -128,7 +145,7 @@ const Login = () => {
         </Form>
 
         <p className="mt-3 text-center">
-          <Link to="/forgotPassword">Forgot password?</Link> {/* Forgot password link */}
+          <Link to="/forgotPassword">Forgot password?</Link>
         </p>
 
         <hr className="my-4" />

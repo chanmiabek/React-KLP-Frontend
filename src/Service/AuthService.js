@@ -6,20 +6,22 @@ const API_URL = 'http://localhost:8080/api/user/login'; // Replace with your bac
 
 
 
-const register = (username, email, password) => {
+const register = (fullName, email, password, role) => {
     return axios.post(API_URL + 'signup', {
-    username,
+    fullName,
     email,
     password,
+    role,
     }).then((response) => {
     return response.data;
     });
 };
 
-const login = (username, password) => {
+const login = (fullName, password, role) => {
     return axios.post(API_URL + 'login', {
-    username,
+    fullName,
     password,
+    role,
     }).then((response) => {
     if (response.data.accessToken) {
         localStorage.setItem('user', JSON.stringify(response.data));

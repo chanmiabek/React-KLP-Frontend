@@ -10,7 +10,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 const Layout = () => {
   return (
     <>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-primary shadow-sm w-100">
+      <nav className="navbar navbar-expand-lg navbar-dark bg-primary fw-bold shadow-sm w-100 mx-0 px-0">
         <div className="container">
           {/* Logo */}
           <span><img src="https://cdn-icons-png.flaticon.com/512/1055/1055646.png" alt="logo" height={50} width={50} /></span>
@@ -23,10 +23,10 @@ const Layout = () => {
             className="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
-            data-bs-target="#klpNavbar" // Target the ID of the collapsible content
+            data-bs-target="klpNavbar" // Target the ID of the collapsible content
             aria-controls="klpNavbar"
             aria-expanded="false"
-            aria-label="Toggle navigation"
+            aria-label="Toggle navigation drop-down"
           >
             <span className="navbar-toggler-icon"></span>
           </button>

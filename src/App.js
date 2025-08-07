@@ -1,6 +1,6 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route} from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
 import StudentDashboard from './Administrator/StudentDashboard';
 import InstructorDashboard from './Administrator/InstructorDashboard'
@@ -46,6 +46,8 @@ import Notification from './Component/Notification';
 //import StudentSidebar from './Administrator/StudentSidebar';
 import RoleSelector from './Administrator/RoleSelector';
 import ForgotPassword from './Administrator/ForgotPassword';
+import TermService from './Component/TermService';
+import PrivacyPolicy from './Component/PrivacyPolicy';
 
 
 
@@ -72,6 +74,8 @@ function App() {
         <Route path="/carousel" element={<Carousel />} />
         <Route path="/featureCard" element={<FeatureCard />} />
         <Route path="FAQSection" element={<FAQsection />} />
+        <Route path="term-service" element={<TermService />} />
+        <Route path="privacy-policy" element={<PrivacyPolicy />} />
         <Route path="roleSelector" element={<RoleSelector />} />
 
         <Route path="*" element={<NotFound />} />

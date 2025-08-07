@@ -24,8 +24,8 @@ export const AuthProvider = ({ children }) => {
         setLoading(false);
     }, []);
 
-    const login = async (fullName, password) => {
-        const userData = await authService.login(fullName, password);
+    const login = async (fullName, password, role) => {
+        const userData = await authService.login(fullName, password, role);
         setUser(userData);
         return userData;
     };
@@ -35,14 +35,16 @@ export const AuthProvider = ({ children }) => {
         setUser(null);
     };
 
-    const register = async (fullName, email, password) => {
-        await authService.register(fullName, email, password);
+    const register = async (fullName, email, password, role) => {
+        await authService.register(fullName, email, password, role);
         // Optionally log in after registration, or redirect to login page
+
     };
 
     return (
         <AuthContext.Provider value={{ user, loading, login, logout, register, isAuthenticated: !!user }}>
             {!loading && children}
+            
         </AuthContext.Provider>
     );
 };

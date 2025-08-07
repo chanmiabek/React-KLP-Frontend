@@ -1,7 +1,17 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+
+
 
 nav{
     top: 0;
     margin: 0;
+    left: 0;
     background-color: blue;
     color: white;
     display: flex;
@@ -18,7 +28,6 @@ nav{
 }
 
 ul{
-    margin:  0;
     list-style: none;
     display: flex;
     gap: 10px;

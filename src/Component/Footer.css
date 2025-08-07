@@ -23,7 +23,7 @@
 .footer-klp p,
 .footer-klp .small {
     color: #f7f7f8; /* Lighter text for paragraphs and small text */
-    line-height: 1.6;
+    line-height: 1.2rem;
 }
 
 .footer-link {
@@ -58,12 +58,12 @@
 /* Newsletter form */
 .footer-klp .form-control {
     background-color: #343a40; /* Darker input background */
-    border-color: #495057; /* Border color for inputs */
+    border-color: #fafafa; /* Border color for inputs */
     color: #f6f8fa;
 }
 
 .footer-klp .form-control::placeholder {
-    color: #f2f2f3;
+    color: #f9f9fc;
 }
 
 .footer-klp .btn-primary {
@@ -113,7 +113,7 @@
     align-items: center;
     justify-content: center;
     border-radius: 50%;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 2px 10px rgba(236, 236, 236, 0.3);
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
     z-index: 1000; /* Ensure it's above other content */

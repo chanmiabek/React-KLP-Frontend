@@ -7,18 +7,25 @@ const Logout = () => {
   const handleLogout = async () => {
     try {
       // 1. Call the server's logout endpoint
-      await axios('/api/logout', { method: 'POST' });
+      await axios('http://localhost/api/user/logout', { method: 'POST', withCredentials: true });
 
       // 2. Clear client-side data
       localStorage.removeItem('userToken');
 
-      // 3. Redirect
+      // 3. Redirect the user to the login page
       navigate('/login');
     } catch (error) {
+      // Handle any errors that occur during the logout process.
       console.error('Logout failed:', error);
+
+      alert('Failed to log out. Please try again.');
     }
   };
 
-  return <button onClick={handleLogout}>Logout</button>;
+  return (
+    // This button triggers the logout process when clicked.
+    <button onClick={handleLogout}>Logout</button>
+  );
 };
+
 export default Logout;

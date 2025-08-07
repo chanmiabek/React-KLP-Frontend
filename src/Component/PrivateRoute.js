@@ -40,7 +40,7 @@ export const AuthProvider = ({ children }) => {
                 body: JSON.stringify({ fullName, password }),
             });
 
-             if (response.ok) {
+            if (response.ok) {
                 const data = await response.json();
                 const { token, role } = data; 
 
@@ -52,13 +52,13 @@ export const AuthProvider = ({ children }) => {
                 setLoading(false);
 
                 // Redirect based on role after successful login
-                if (role && login  === 'instructor') {
+                if (role === 'instructor') {
                     navigate('/instructorDashboard');
-                } else if (role && login === 'student') {
+                } else if (role === 'student') {
                     navigate('/studentDashboard');
                 } else {
                     // Default redirect if role is not recognized or other issues
-                    navigate('/');
+                    navigate('/dashboard');
                 }
                 return true; 
             } else {
@@ -100,8 +100,8 @@ export const AuthProvider = ({ children }) => {
             {children}
         </AuthContext.Provider>
     );
+};
 
-}
 export const useAuth = () => {
     return useContext(AuthContext);
 };

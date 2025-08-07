@@ -6,7 +6,7 @@ const InstructorSidebar = () => (
     <h5 className="mb-4">Instructor Panel</h5>
     <NavLink to="/dashboard" className="nav-link">🏠 Dashboard</NavLink>
     <NavLink to="/student" className="nav-link">🎓 Student Progress</NavLink>
-    <NavLink to="/post-announcement" className="nav-link">📢 Announcements</NavLink>
+    <NavLink to="/announcement" className="nav-link">📢 Announcements</NavLink>
     <NavLink to="/add-course" className="nav-link">➕ Add Course</NavLink>
     <NavLink to="/assignment" className="nav-link">📝 Manage Assignments</NavLink>
     <NavLink to="/recommendation" className="nav-link">💡 Recommendations</NavLink>
